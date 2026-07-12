@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Hamza Adnan Ahmed | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #121212;
+            --border-color: #222222;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-white: #ffffff;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            padding: 0 2rem;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-color);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 4rem 0;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Aligns profile picture vertically with text */
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            flex: 1; /* Allows text section to flexibly grow */
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .tagline strong {
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        /* Profile Image Layout Patch */
+        .profile-image-container {
+            width: 400px; /* Constrains size inside the flex row container */
+            min-width: 400px; /* Prevents compression */
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            background-color: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .profile-image-container:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* Pill Buttons */
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .pill-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            background: transparent;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .pill-btn:hover {
+            background: #161616;
+            border-color: #444;
+        }
+
+        /* Section Commons */
+        section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-label {
+            font-family: var(--font-display);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Projects Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 270px;
+            transition: transform 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .project-title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skills-card {
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .skills-card h3 {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .skills-list {
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Timeline / Experience Table */
+        .experience-section h2 {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            text-align: right;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .timeline-table tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .timeline-table td {
+            padding: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .time-col {
+            width: 20%;
+            color: var(--text-secondary);
+        }
+
+        .title-col {
+            width: 40%;
+            font-weight: 500;
+        }
+
+        .detail-col {
+            width: 40%;
+            color: var(--text-secondary);
+            text-align: right;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body { padding: 0 1rem; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero-meta { flex-direction: column-reverse; gap: 2rem; align-items: flex-start; }
+            .profile-image-container { max-width: 180px; min-width: 180px; }
+            .experience-section h2 { font-size: 2.5rem; }
+            .timeline-table tr { display: flex; flex-direction: column; padding: 1rem 0; }
+            .timeline-table td { padding: 0.25rem 0; width: 100%; text-align: left; }
+            .detail-col { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">j
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">Hamza Ahmed.</div>
+            <div class="nav-links">
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <main class="hero">
+            
+            <div class="hero-meta">
+                <div class="name-box">
+                    <h1>Mohammad Hamza<br>Adnan Ahmed</h1>
+                    <p class="tagline">
+                        I am a <strong>3rd-year B.Sc. student</strong> at the <strong>University of Asia Pacific</strong>, focusing on building efficient core logic, software engineering principles, and clean web structures.
+                    </p>
+                </div>
+
+                <div class="profile-image-container">
+                    <img src="WhatsApp Image 2026-07-12 at 4.50.04 PM.jpeg" alt="Mohammad Hamza Adnan Ahmed">
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="pill-btn">GitHub</a>
+                <a href="#" class="pill-btn">LinkedIn</a>
+                <a href="mailto:your.email@example.com" class="pill-btn">Email</a>
+            </div>
+        </main>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="section-label">../Featured projects ...</div>
+            <div class="project-grid">
+                
+                <!-- Project 1: Rocky App -->
+                <div class="project-card">
+                    <div>
+                        <div class="project-title">Rocky: Speech-to-Text App</div>
+                        <p class="project-desc">A Python desktop application that records microphone data via PyAudio and processes live audio using the Google Cloud Speech Recognition API. Optimized with multithreading for a continuous, seamless UI experience built on Tkinter.</p>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Tkinter</span>
+                        <span class="tag">Google Cloud API</span>
+                        <span class="tag">Multithreading</span>
+                    </div>
+                </div>
+
+                <!-- Project 2: DBMS -->
+                <div class="project-card">
+                    <div>
+                        <div class="project-title">Inventory Database Management System</div>
+                        <p class="project-desc">A structural system architecture designed to track, update, and manage inventory datasets reliably while maintaining data consistency and optimized entry querying operations.</p>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">Database</span>
+                        <span class="tag">Data Management</span>
+                        <span class="tag">Backend Logic</span>
+                    </div>
+                </div>
+
+                <!-- Project 3: Cosmetics Website -->
+                <div class="project-card">
+                    <div>
+                        <div class="project-title">Aurelia (Cosmetics Business Platform)</div>
+                        <p class="project-desc">A modern, responsive storefront built from scratch to display product lines for a retail cosmetics business, focusing clean grid alignments and seamless navigation rules.</p>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">Web Design</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- About & Skills Section -->
+        <section id="skills">
+            <div class="section-label">../About me & Skills ...</div>
+            <div class="skills-grid">
+                <div class="skills-card">
+                    <h3>Core Programming</h3>
+                    <div class="skills-list">Python / C / C++ / Java (Basic)</div>
+                </div>
+                
+                <div class="skills-card">
+                    <h3>Web Tech</h3>
+                    <div class="skills-list">HTML5 / CSS3 / Modern Layouts</div>
+                </div>
+
+                <div class="skills-card">
+                    <h3>CS Fundamentals</h3>
+                    <div class="skills-list">Data Structures / OOP / Logic Design</div>
+                </div>
+
+                <div class="skills-card">
+                    <h3>Tools</h3>
+                    <div class="skills-list">Git / GitHub / Linux CLI / VS Code</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education / Timeline Section -->
+        <section id="education" class="experience-section">
+            <h2>Education</h2>
+            <table class="timeline-table">
+                <tr>
+                    <td class="time-col">2023 - Present</td>
+                    <td class="title-col">University of Asia Pacific</td>
+                    <td class="detail-col">B.Sc. in Computer Science & Engineering (3rd Year)</td>
+                </tr>
+                <tr>
+                    <td class="time-col">Academic Projects</td>
+                    <td class="title-col">Core Language Systems Implementation</td>
+                    <td class="detail-col">Applied usage of C, C++, and Python for data systems</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div>© 2026 Mohammad Hamza Adnan Ahmed</div>
+            <div>Built with clean HTML & CSS</div>
+        </footer>
+    </div>
+
+</body>
+</html>
