@@ -653,15 +653,18 @@
 
     </div>
 
-    <!-- Theme Switcher Script -->
+    <!-- Theme Switcher Script (Light Mode Default) -->
     <script>
         const toggleBtn = document.getElementById('theme-toggle');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const savedTheme = localStorage.getItem('theme');
 
-        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        // Only activate dark theme if explicitly stored
+        if (savedTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
             toggleBtn.textContent = '☀️ Light';
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            toggleBtn.textContent = '🌙 Dark';
         }
 
         toggleBtn.addEventListener('click', () => {
