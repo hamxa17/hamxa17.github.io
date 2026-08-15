@@ -8,14 +8,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* Light Theme (Default) */
         :root {
             --bg-color: #f5f4ee;
             --card-bg: #ffffff;
-            --chrome-bg: #ececE3;
+            --chrome-bg: #ecece3;
             --border-color: #14140f;
             --text-primary: #14140f;
             --text-secondary: #6c6a5f;
-            --accent: #ffd955;
+            --accent: #ffd955; /* Signature Yellow */
             --pill-gray: #d8d7cd;
             --pill-gray-hover: #c9c8bc;
             --shadow: 6px 6px 0 var(--border-color);
@@ -23,6 +24,22 @@
             --shadow-sm: 3px 3px 0 var(--border-color);
             --font-display: 'Poppins', sans-serif;
             --font-body: 'Poppins', sans-serif;
+        }
+
+        /* Dark Theme Override */
+        [data-theme="dark"] {
+            --bg-color: #121210;
+            --card-bg: #1c1c18;
+            --chrome-bg: #272722;
+            --border-color: #f5f4ee;
+            --text-primary: #f5f4ee;
+            --text-secondary: #a8a69a;
+            --accent: #ffd955; /* Signature Yellow */
+            --pill-gray: #2d2c26;
+            --pill-gray-hover: #3a3931;
+            --shadow: 6px 6px 0 var(--border-color);
+            --shadow-lg: 9px 9px 0 var(--border-color);
+            --shadow-sm: 3px 3px 0 var(--border-color);
         }
 
         * {
@@ -40,6 +57,11 @@
             * { transition: none !important; animation: none !important; }
         }
 
+        /* Smooth color transitions when toggling themes */
+        body, nav, .project-card, .skills-card, .timeline-row, .pill-btn, .quicklink-box, .card-topbar, .card-link {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
@@ -53,6 +75,16 @@
         a:focus-visible, button:focus-visible {
             outline: 3px solid var(--accent);
             outline-offset: 2px;
+        }
+
+        /* Underline Highlight Style */
+        .highlight, .tagline strong {
+            background: linear-gradient(to bottom, transparent 60%, var(--accent) 60%);
+            color: var(--text-primary);
+            font-weight: 700;
+            display: inline;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
         }
 
         /* Glassmorphic Sticky Navigation */
@@ -71,6 +103,10 @@
             padding: 1.25rem 2.5rem;
         }
 
+        [data-theme="dark"] nav {
+            background-color: rgba(18, 18, 16, 0.75);
+        }
+
         .logo {
             font-family: var(--font-display);
             font-weight: 800;
@@ -80,6 +116,7 @@
 
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 2rem;
         }
 
@@ -95,16 +132,30 @@
             color: var(--text-secondary);
         }
 
+        .theme-toggle {
+            background: var(--pill-gray);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            cursor: pointer;
+            box-shadow: 2px 2px 0 var(--border-color);
+            font-size: 0.85rem;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--pill-gray-hover);
+            transform: translate(-1px, -1px);
+        }
+
         /* Main Container */
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 2rem;
-        }
-
-        /* Highlight helper class */
-        .highlight {
-            background: linear-gradient(to bottom, transparent 60%, var(--accent) 60%);
         }
 
         /* Hero Section */
@@ -136,12 +187,6 @@
             flex: 1;
             max-width: 600px;
             font-weight: 400;
-        }
-
-        .tagline strong {
-            color: var(--text-primary);
-            font-weight: 700;
-            background: linear-gradient(to bottom, transparent 60%, var(--accent) 60%);
         }
 
         .profile-image-container {
@@ -348,11 +393,12 @@
             font-weight: 600;
             font-size: 0.9rem;
             background: var(--card-bg);
-            transition: background 0.15s ease;
+            transition: background 0.15s ease, color 0.15s ease;
         }
 
         .card-link:hover {
             background: var(--accent);
+            color: #121210;
         }
 
         /* Skills Section */
@@ -448,13 +494,14 @@
 </head>
 <body>
 
-    <!-- Edge-to-Edge Navigation -->
+    <!-- Edge-to-Edge Navigation with Dark Mode Switcher -->
     <nav>
         <div class="logo">Hamza Adnan.</div>
         <div class="nav-links">
             <a href="#projects">Projects</a>
             <a href="#skills">Skills</a>
             <a href="#education">Education</a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙 Dark</button>
         </div>
     </nav>
 
@@ -515,7 +562,7 @@
                             <span class="tag">Multithreading</span>
                         </div>
                     </div>
-                    <a class="card-link" href="https://github.com/hamxa17/Rocky" target="_blank" rel="noopener noreferrer">View on GitHub &#8599;</a>
+                    <a class="card-link" href="https://github.com/hamxa17" target="_blank" rel="noopener noreferrer">View on GitHub &#8599;</a>
                 </div>
 
                 <!-- Project 2: DBMS -->
@@ -535,7 +582,7 @@
                             <span class="tag">Backend Logic</span>
                         </div>
                     </div>
-                    <a class="card-link" href="https://github.com/hamxa17/Inventory-Control-System" target="_blank" rel="noopener noreferrer">View on GitHub &#8599;</a>
+                    <a class="card-link" href="https://github.com/hamxa17" target="_blank" rel="noopener noreferrer">View on GitHub &#8599;</a>
                 </div>
 
                 <!-- Project 3: Cosmetics Website -->
@@ -555,7 +602,7 @@
                             <span class="tag">Web Design</span>
                         </div>
                     </div>
-                    <a class="card-link" href="https://github.com/hamxa17/aurelia" target="_blank" rel="noopener noreferrer">View on GitHub &#8599;</a>
+                    <a class="card-link" href="https://github.com/hamxa17" target="_blank" rel="noopener noreferrer">View on GitHub &#8599;</a>
                 </div>
 
             </div>
@@ -606,5 +653,29 @@
 
     </div>
 
+    <!-- Theme Switcher Script -->
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggleBtn.textContent = '☀️ Light';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            let currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                toggleBtn.textContent = '🌙 Dark';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                toggleBtn.textContent = '☀️ Light';
+            }
+        });
+    </script>
 </body>
 </html>
